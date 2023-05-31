@@ -1,0 +1,35 @@
+@import '../../../style/colors.scss';
+
+
+.button {
+  font-size: 14px;
+  height: 32px;
+  border: 1px solid $grey_color;
+  background-color: $green_color_40;
+  margin-left: 12px;
+  cursor: pointer;
+  color: $white_color;
+  padding: 0 12px 0 12px;
+  box-sizing: border-box;
+  
+  &:hover {
+      opacity: .8;
+  }
+
+  &:active {
+      background-color: $white_color;
+  }
+
+  &:disabled {
+      opacity: .5;
+      cursor: default;
+    }
+    
+  &:disabled:active {
+      font-size: 14px;
+      background-color: $green_color_40;
+  }
+}
+
+
+

@@ -1,0 +1,21 @@
+@import '../../../style/colors.scss';
+
+.message-card {
+  flex-grow: 0;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: $green_color_10;
+  box-sizing: border-box;
+  border-radius: 15px;
+  word-wrap: break-word;
+    
+  &__outgoing {
+    align-self: flex-end;
+  }
+    
+  &__incoming {
+    background-color: $grey_color;
+    align-self: flex-start;
+  }
+
+}

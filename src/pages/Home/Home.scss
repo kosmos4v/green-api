@@ -1,0 +1,76 @@
+@import '../../style/colors.scss';
+
+.home {
+
+    display: flex;
+    position: relative;
+
+    &__chat-panel {
+      display: flex;
+      flex-direction: column;
+      width: 35vw;
+      height: 100vh;
+      background-color: $white_color;
+      flex-shrink: 0;
+      overflow: scroll;
+
+      &__header {
+        display: flex;
+        position: fixed;
+        width: 35%;
+        height: 64px;
+        background-color: $grey_color;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &__chats {
+        margin-top: 64px;
+      }
+
+      &__chat-card {
+        height: 24px;
+        width: 100%;
+        cursor: pointer;
+        padding: 24px 0 24px 0;
+        align-self: center;
+        list-style-type: none;
+        border-bottom: solid 1px $grey_color;
+      }
+
+    }
+    
+    &__conversation-panel {
+      display: flex;
+      flex-direction: column;
+      width: 65vw;
+      height: 100vh;
+      background-color: $beige_color;
+      justify-content: end;
+
+      &__message-wrapper {
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+        margin-bottom: 64px;
+      }
+
+      &__input-fields {
+        position: fixed;
+        display: flex;
+        width: 65%;
+        height: 64px;
+        background-color: $grey_color;
+        align-items: center;
+        justify-content: center;
+    
+      }
+
+    }
+
+  }
+  
+
+
+
+
