@@ -163,11 +163,6 @@ export const chatReducer = handleActions<TChatState, TChatAction>({
       type: 'incoming' 
     };
 
-    const newCurrentChat = state.currentChat.phone === phone 
-      ? { ...state.currentChat, messanges:[...state.currentChat.messages, newMessage] } 
-      : state.currentChat;
-      console.log('newCurrentChat', newCurrentChat);
-
       if (!state.chats[phone]) {
         return ({
           ...state,
@@ -181,10 +176,14 @@ export const chatReducer = handleActions<TChatState, TChatAction>({
         })
       } else {
         const updatedMessages = state.chats[phone].messages
-        .find((message) => message.timestamp === newMessage.timestamp)
-        ? state.chats[phone].messages
-        : [...state.chats[phone].messages, newMessage];
+          .find((message) => message.timestamp === newMessage.timestamp)
+          ? state.chats[phone].messages
+          : [...state.chats[phone].messages, newMessage];
         
+        const newCurrentChat = state.currentChat.phone === phone 
+          ? { ...state.currentChat, messages:[...state.currentChat.messages, newMessage] } 
+          : state.currentChat;
+
         const updatedChat = {
           ...state.chats[phone],
           messages: updatedMessages,

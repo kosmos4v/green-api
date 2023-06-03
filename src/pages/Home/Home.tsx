@@ -96,7 +96,6 @@ export const Home: React.FC = () => {
     receiptId,
     isNotificationRendered
   ]);
-      
   return (
     <div className="home">
       <div className="home__chat-panel">
