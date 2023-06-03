@@ -1,4 +1,4 @@
-import {TMessage} from './message'
+import { TMessage } from './message';
 
 export type TChat = {
   phone: string,
@@ -6,4 +6,4 @@ export type TChat = {
   messages: TMessage[]
 };
 
-export type TChats = Record<string,TChat>
+export type TChats = Record<string, TChat>;

@@ -1,5 +1,5 @@
-import React, { useCallback, } from "react";
-import classnames from "classnames";
+import React, { useCallback } from 'react';
+import classnames from 'classnames';
 
 import './Input.scss';
 
@@ -15,12 +15,12 @@ type TInputProps = {
   fullwidth?: boolean,
   onEnter?: () => void,
   onChange: (event: React.ChangeEvent<HTMLInputElement> | undefined, value: string) => void,
-}
+};
 
-export const Input: React.FC<TInputProps> = ({ 
+export const Input: React.FC<TInputProps> = ({
   placeholder = '',
   value = '',
-  type='text',
+  type = 'text',
   message = '',
   disabled = false,
   isErrorMessage = true,
@@ -28,9 +28,8 @@ export const Input: React.FC<TInputProps> = ({
   onEnter,
   fullwidth = false,
   name,
-  label=''
+  label = '',
 }) => {
-
   const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
     if (typeof onChange === 'function' && !disabled) {
       const newValue = event.target.value;
@@ -45,7 +44,7 @@ export const Input: React.FC<TInputProps> = ({
   }, [disabled, onEnter]);
 
   return (
-    <div className={classnames('input__wrapper', {'nput__wrapper_fullwidth': fullwidth})}>
+    <div className={classnames('input__wrapper', { nput__wrapper_fullwidth: fullwidth })}>
       <span>{label}</span>
       <input
         type={type}
@@ -57,11 +56,13 @@ export const Input: React.FC<TInputProps> = ({
         onKeyDown={handleEnterDown}
         disabled={disabled}
       />
-      {isErrorMessage && <span
+      {isErrorMessage && (
+      <span
         className="input__message"
       >
         {message}
-      </span>}
+      </span>
+      )}
     </div>
   );
-}
+};

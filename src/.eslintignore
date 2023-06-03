@@ -1,0 +1,8 @@
+*.scss
+dist
+node_modules
+*.svg
+webpack.config.ts
+babel.config.js
+build.js
+
