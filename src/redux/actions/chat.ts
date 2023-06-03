@@ -1,6 +1,6 @@
-import { TChat } from "../../models/chat";
-import { TMessage } from "../../models/message";
-import { TNotificationType } from "../../models/notification";
+import { TChat } from '../../models/chat';
+import { TMessage } from '../../models/message';
+import { TNotificationType } from '../../models/notification';
 
 export const ADD_NEW_CHAT = 'ADD_NEW_CHAT';
 
@@ -25,7 +25,7 @@ export const addNewChat = (phone: string) => ({
   type: ADD_NEW_CHAT,
   payload: {
     phone,
-  }
+  },
 });
 
 export const setCurrentChat = (currentChat: TChat) => ({
@@ -55,21 +55,21 @@ export const sendMessagePending = (isPending: boolean) => ({
   },
 });
 
-export const sendMessageSuccess = (id: string, currentMessage: TMessage, phone: string) =>({
+export const sendMessageSuccess = (id: string, currentMessage: TMessage, phone: string) => ({
   type: SEND_MESSAGE_SUCCESS,
   payload: {
     incomingMessageId: id,
     currentMessage,
     phone,
-   },
+  },
 });
 
 export const sendMessageFailure = (error: string) => ({
   type: SEND_MESSAGE_FAILURE,
   payload: {
-     error,
+    error,
   },
-})
+});
 
 export const receiveNotification = (userId: string) => ({
   type: RECEIVE_NOTIFICATION,
@@ -103,7 +103,7 @@ export const deleteNotification = (userId: string, receiptId: number) => ({
   type: DELETE_NOTIFICATION,
   payload: {
     receiptId,
-    userId
+    userId,
   },
 });
 

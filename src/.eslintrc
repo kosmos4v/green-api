@@ -1,0 +1,58 @@
+{
+	"extends": [
+		"airbnb",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:eslint-comments/recommended",
+		"plugin:redux-saga/recommended"
+  ],
+	"plugins": [
+    "@typescript-eslint",
+    "eslint-comments",
+    "react",
+    "import",
+		"react-hooks",
+		"redux-saga"
+  ],
+	"globals": {
+		"console": true,
+		"window": true
+	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"modules": true,
+			"jsx": true
+    },
+    "project": "./tsconfig.json"
+	},
+	"root": true,
+	"env": {
+		"browser": true,
+		"node": true,
+		"es6": true
+	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".ts", ".tsx"]
+			}
+		}
+	},
+	"rules": {
+		"no-void": ["error", { "allowAsStatement": true }],
+		"no-bitwise": [1, { "int32Hint": true, "allow": ["~"] }],
+		"no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+		"react/jsx-fragments": ["error", "element"],
+		"import/prefer-default-export": 0,
+		"react/prop-types": 0,
+		"react/require-default-props": 0,
+		"react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+		"react/function-component-definition": 0,
+		"react/style-prop-object": 0,
+		"no-restricted-exports": 0
+	}
+}

@@ -1,4 +1,3 @@
-
 type TTypeWebhook = 'incomingMessageReceived' | 'incomingCall';
 
 type TInstanceData = {
@@ -14,7 +13,7 @@ type TSenderData = {
   senderName: string,
 };
 
-type TQuotedMessageData ={
+type TQuotedMessageData = {
   stanzaId: string,
   participant: string,
   typeMessage?: string,
@@ -22,7 +21,7 @@ type TQuotedMessageData ={
   caption?: string,
   fileName?: string,
   jpegThumbnail?: string,
-}
+};
 
 type TImageMessageData = {
   typeMessage: 'imageMessage' | 'videoMessage',
@@ -40,7 +39,7 @@ type TTextMessageData = {
   textMessageData: {
     textMessage: string,
   }
-}
+};
 
 type TExtendedTextMessageData = {
   typeMessage: 'quotedMessage' | 'extendedTextMessage',
@@ -64,7 +63,7 @@ type TReactionMessage = {
     text: string
   },
   quotedMessage: TQuotedMessageData,
-}
+};
 
 type TIncomingMessageBody = {
   typeWebhook: TTypeWebhook,
@@ -75,16 +74,7 @@ type TIncomingMessageBody = {
   messageData: TTextMessageData | TImageMessageData | TExtendedTextMessageData | TReactionMessage,
 };
 
-// type TIncomingCall = {
-//   from: string,
-//   typeWebhook: TTypeWebhook,
-//   instanceData: TInstanceData,
-//   timestamp: number,
-//   idMessage: string,
-// };
-
 export type TNotificationType = {
   receiptId: number,
   body: TIncomingMessageBody,
 } | undefined;
-

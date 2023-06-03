@@ -1,18 +1,16 @@
-import React from "react";
-import classnames from "classnames";
+import React from 'react';
+import classnames from 'classnames';
 
 import './MessageCard.scss';
+import { TMessageType } from '../../../models/message';
 
 type TMessageCardProps = {
   children: React.ReactNode;
-  type?: 'incoming' | 'outgoing'
+  type: TMessageType
 };
 
-export const MessageCard: React.FC<TMessageCardProps> = ({ children, type }) => {
-
-  return (
-    <div className={classnames("message-card", `message-card__${type}`)}>
-      {children}
-    </div>
-  );
-}
+export const MessageCard: React.FC<TMessageCardProps> = ({ children, type }) => (
+  <div className={classnames('message-card', `message-card__${type}`)}>
+    {children}
+  </div>
+);

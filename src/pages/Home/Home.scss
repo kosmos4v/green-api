@@ -32,12 +32,12 @@
         height: 24px;
         width: 100%;
         cursor: pointer;
-        padding: 24px 0 24px 0;
-        align-self: center;
-        list-style-type: none;
+        padding: 24px 0 48px 0;
+        border: none;
         border-bottom: solid 1px $grey_color;
+        background-color: $white_color;
+        font-size: 20px;
       }
-
     }
     
     &__conversation-panel {
@@ -46,7 +46,7 @@
       width: 65vw;
       height: 100vh;
       background-color: $beige_color;
-      justify-content: end;
+      justify-content: flex-end;
 
       &__message-wrapper {
         display: flex;

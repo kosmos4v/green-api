@@ -3,7 +3,7 @@ import { SAVE_USER_DATA } from '../actions/user';
 
 export type TUserState = {
   userId: string,
-}
+};
 
 export type TUserAction = {
   userId: string,
@@ -11,7 +11,7 @@ export type TUserAction = {
 
 const initialState: TUserState = {
   userId: '',
-}
+};
 
 const userReducer = handleActions<TUserState, TUserAction>({
   [SAVE_USER_DATA]: (state, { payload }) => ({
