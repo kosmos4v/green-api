@@ -5,13 +5,15 @@ type TBody = Record<string, string>;
 export function request(
   method: string,
   apiMethod: string,
-  userId: string,
   body?: TBody,
   receiptId?: number,
 ): Promise<Response> {
   const userApiToken: string | null = localStorage.getItem('userApiToken');
+  const userId: string | null = localStorage.getItem('userId');
 
-  const url = userApiToken ? `${BASE_URL}/waInstance${userId}/${apiMethod}/${userApiToken}` : '';
+  const url = userApiToken && userId
+    ? `${BASE_URL}/waInstance${userId}/${apiMethod}/${userApiToken}`
+    : '';
 
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',

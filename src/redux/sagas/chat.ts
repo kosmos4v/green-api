@@ -1,4 +1,8 @@
-import { call, delay, put } from 'typed-redux-saga';
+import {
+  call,
+  delay,
+  put,
+} from 'typed-redux-saga';
 import { takeEvery } from 'redux-saga/effects';
 import { Action } from 'redux-actions';
 
@@ -44,22 +48,21 @@ function* sendMessage({ payload }: Action<{
   }
 }
 
-function* receiveNotification({ payload }: Action<{ userId: string }>) {
-  while (true) {
-    try {
-      yield put(receiveNotificationPending(true));
-      const notification:
-      TNotificationType
-      | null = yield* call(apiReceiveNotification, payload.userId);
-      if (notification) {
-        yield put(receiveNotificationSuccess(notification));
-        break;
-      } else delay(2000);
-    } catch (e) {
-      yield put(receiveNotificationFailure('Не удалось загрузить уведомление'));
-    } finally {
-      yield put(receiveNotificationPending(false));
+function* receiveNotification(): Generator {
+  try {
+    yield put(receiveNotificationPending(true));
+    const notification: TNotificationType | null = yield* call(apiReceiveNotification);
+    if (notification) {
+      yield put(receiveNotificationSuccess(notification));
+      // break;
+    } else {
+      delay(2000);
+      yield* call(receiveNotification);
     }
+  } catch (e) {
+    yield put(receiveNotificationFailure('Не удалось загрузить уведомление'));
+  } finally {
+    yield put(receiveNotificationPending(false));
   }
 }
 

@@ -4,9 +4,7 @@ import React, {
   useEffect,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
-import { saveUserData } from '../../redux/actions/user';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 
@@ -14,7 +12,6 @@ import './Login.scss';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [userId, setUserId] = useState('');
   const [userApiToken, setUserApiToken] = useState('');
   const [idError, setIdError] = useState('');
@@ -33,10 +30,10 @@ export const Login: React.FC = () => {
     if (!userApiToken) setTokenError('Введите ваш token');
     if (userId && userApiToken) {
       localStorage.setItem('userApiToken', userApiToken);
-      dispatch(saveUserData(userId));
+      localStorage.setItem('userId', userId);
       navigate('/home');
     }
-  }, [userId, userApiToken, navigate, dispatch]);
+  }, [userId, userApiToken, navigate]);
 
   useEffect((): void => {
     if (userId) setIdError('');
