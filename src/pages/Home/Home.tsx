@@ -34,7 +34,7 @@ export const Home: React.FC = () => {
   } = useSelector((state: TRootState) => state.chat);
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState<TMessage>({
-    messageId: '', text: '', timestamp: '', type: '',
+    messageId: '', text: '', timestamp: 0, type: '',
   });
 
   const handleChangePhone = useCallback((_: unknown, value: string): void => {
@@ -56,7 +56,7 @@ export const Home: React.FC = () => {
 
   const handleClickCurrentChat = useCallback((event: React.MouseEvent<HTMLButtonElement>): void => {
     setMessage({
-      messageId: '', text: '', timestamp: '', type: '',
+      messageId: '', text: '', timestamp: 0, type: '',
     });
     const liElement = event.target as HTMLLIElement;
     const currentNumber = liElement.innerText;
@@ -67,12 +67,12 @@ export const Home: React.FC = () => {
     if (userId && userApiToken) {
       dispatch(sendMessage(
         currentChat.phone,
-        { ...message, timestamp: new Date().getTime().toString(), type: 'outgoing' },
+        { ...message, timestamp: new Date().getTime(), type: 'outgoing' },
         userId,
       ));
     }
     setMessage({
-      messageId: '', text: '', timestamp: '', type: '',
+      messageId: '', text: '', timestamp: 0, type: '',
     });
   }, [dispatch, message, currentChat, userId, userApiToken]);
 
@@ -103,6 +103,11 @@ export const Home: React.FC = () => {
     receiptId,
     isNotificationRendered,
   ]);
+
+  console.log('currentChat', currentChat);
+  console.log(currentChat?.messages
+    .concat()
+    .sort((min, max) => min.timestamp - max.timestamp));
   return (
     <div className="home">
       <div className="home__chat-panel">
@@ -136,7 +141,7 @@ export const Home: React.FC = () => {
       <div className="home__conversation-panel">
         <div className="home__conversation-panel__message-wrapper">
           {currentChat?.messages
-            .sort((max, min) => parseInt(max.timestamp, 10) - parseInt(min.timestamp, 10))
+            .concat()
             .map((chat) => (
               <MessageCard key={chat.timestamp} type={chat.type}>
                 {chat.text}

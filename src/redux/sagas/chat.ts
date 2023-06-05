@@ -61,6 +61,8 @@ function* receiveNotification(): Generator {
     }
   } catch (e) {
     yield put(receiveNotificationFailure('Не удалось загрузить уведомление'));
+    delay(2000);
+    yield* call(receiveNotification);
   } finally {
     yield put(receiveNotificationPending(false));
   }

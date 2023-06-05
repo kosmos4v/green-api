@@ -3,6 +3,6 @@ export type TMessageType = 'incoming' | 'outgoing' | '';
 export type TMessage = {
   messageId: string,
   text: string,
-  timestamp: string,
+  timestamp: number,
   type: TMessageType,
 };
