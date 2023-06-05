@@ -157,7 +157,7 @@ export const chatReducer = handleActions<TChatState, TChatAction>({
       const newMessage: TMessage = {
         messageId: payload.notification.body.idMessage,
         text,
-        timestamp: payload.notification.body.timestamp.toString(),
+        timestamp: payload.notification.body.timestamp,
         type: 'incoming',
       };
 
