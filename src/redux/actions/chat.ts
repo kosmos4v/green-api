@@ -71,11 +71,8 @@ export const sendMessageFailure = (error: string) => ({
   },
 });
 
-export const receiveNotification = (userId: string) => ({
+export const receiveNotification = () => ({
   type: RECEIVE_NOTIFICATION,
-  payload: {
-    userId,
-  },
 });
 
 export const receiveNotificationPending = (isPending: boolean) => ({

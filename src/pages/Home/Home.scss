@@ -29,10 +29,11 @@
       }
 
       &__chat-card {
+        display: flex;
         height: 24px;
         width: 100%;
         cursor: pointer;
-        padding: 24px 0 48px 0;
+        padding: 24px 0 48px 24px;
         border: none;
         border-bottom: solid 1px $grey_color;
         background-color: $white_color;

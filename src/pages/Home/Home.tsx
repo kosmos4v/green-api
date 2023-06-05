@@ -25,7 +25,7 @@ const сheckPhoneInput = /^\d+$/;
 export const Home: React.FC = () => {
   const dispatch = useDispatch();
   const userApiToken = localStorage.getItem('userApiToken');
-  const { userId } = useSelector((state: TRootState) => state.user);
+  const userId = localStorage.getItem('userId');
   const {
     chats,
     receiptId,
@@ -82,7 +82,7 @@ export const Home: React.FC = () => {
         && userApiToken
         && typeof receiptId === 'undefined'
         && !isNotificationRendered
-    ) dispatch(receiveNotification(userId));
+    ) dispatch(receiveNotification());
   }, [
     dispatch, userId, userApiToken, receiptId, isNotificationRendered,
   ]);
