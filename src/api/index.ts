@@ -1,7 +1,13 @@
 import { TMessage } from '../models/message';
 import { TNotificationType } from '../models/notification';
 import { TDeleteNotificationResponse, TSendMessageResponse } from '../models/responses';
-import { request } from '../utils/requests/request';
+import { request, ApiMethod } from '../utils/requests/request';
+
+enum Method {
+  post = 'POST',
+  get = 'GET',
+  delete = 'DELETE',
+}
 
 export const apiSendMessage = async (
   phone: string,
@@ -11,20 +17,18 @@ export const apiSendMessage = async (
     chatId: `${phone}@c.us`,
     message: currentMessage.text,
   };
-  const result = await request('POST', 'sendMessage', body);
+  const result = await request(Method.post, ApiMethod.sendMessage, body);
   return await result.json() as TSendMessageResponse;
 };
 
 export const apiReceiveNotification = async (): Promise<TNotificationType> => {
-  const result = await request('GET', 'receiveNotification');
+  const result = await request(Method.get, ApiMethod.receiveNotification);
   return await result.json() as TNotificationType;
 };
 
 export const apiDeleteNotification = async (
-  userId: string,
   receiptId: number,
-  _: undefined,
 ): Promise<TDeleteNotificationResponse> => {
-  const result = await request('DELETE', 'deleteNotification', _, receiptId);
+  const result = await request(Method.delete, ApiMethod.deleteNotification, undefined, receiptId);
   return await result.json() as TDeleteNotificationResponse;
 };

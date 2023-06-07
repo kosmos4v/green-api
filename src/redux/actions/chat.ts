@@ -96,11 +96,10 @@ export const receiveNotificationFailure = (error: string) => ({
   },
 });
 
-export const deleteNotification = (userId: string, receiptId: number) => ({
+export const deleteNotification = (receiptId: number) => ({
   type: DELETE_NOTIFICATION,
   payload: {
     receiptId,
-    userId,
   },
 });
 

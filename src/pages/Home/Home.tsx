@@ -12,7 +12,6 @@ import {
   addNewChat,
   setCurrentChat,
   receiveNotification,
-  deleteNotification,
 } from '../../redux/actions/chat';
 import { MessageCard } from '../../components/common/Message';
 import { TMessage } from '../../models/message';
@@ -67,7 +66,7 @@ export const Home: React.FC = () => {
     if (userId && userApiToken) {
       dispatch(sendMessage(
         currentChat.phone,
-        { ...message, timestamp: new Date().getTime(), type: 'outgoing' },
+        { ...message, timestamp: Math.round(new Date().getTime() / 1000), type: 'outgoing' },
         userId,
       ));
     }
@@ -87,27 +86,6 @@ export const Home: React.FC = () => {
     dispatch, userId, userApiToken, receiptId, isNotificationRendered,
   ]);
 
-  useEffect(() => {
-    if (
-      userId
-      && userApiToken
-      && receiptId
-      && isNotificationRendered
-    ) {
-      dispatch(deleteNotification(userId, receiptId));
-    }
-  }, [
-    dispatch,
-    userId,
-    userApiToken,
-    receiptId,
-    isNotificationRendered,
-  ]);
-
-  console.log('currentChat', currentChat);
-  console.log(currentChat?.messages
-    .concat()
-    .sort((min, max) => min.timestamp - max.timestamp));
   return (
     <div className="home">
       <div className="home__chat-panel">
@@ -142,6 +120,7 @@ export const Home: React.FC = () => {
         <div className="home__conversation-panel__message-wrapper">
           {currentChat?.messages
             .concat()
+            .sort((min, max) => min.timestamp - max.timestamp)
             .map((chat) => (
               <MessageCard key={chat.timestamp} type={chat.type}>
                 {chat.text}

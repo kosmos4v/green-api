@@ -70,5 +70,6 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-redux-saga": "^1.3.2",
     "lint-staged": "^13.2.1"
-  }
+  },
+  "proxy": "https://api.green-api.com"
 }

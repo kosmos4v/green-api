@@ -1,6 +1,5 @@
 import {
   call,
-  delay,
   put,
 } from 'typed-redux-saga';
 import { takeEvery } from 'redux-saga/effects';
@@ -48,44 +47,40 @@ function* sendMessage({ payload }: Action<{
   }
 }
 
-function* receiveNotification(): Generator {
-  try {
-    yield put(receiveNotificationPending(true));
-    const notification: TNotificationType | null = yield* call(apiReceiveNotification);
-    if (notification) {
-      yield put(receiveNotificationSuccess(notification));
-      // break;
-    } else {
-      delay(2000);
-      yield* call(receiveNotification);
-    }
-  } catch (e) {
-    yield put(receiveNotificationFailure('Не удалось загрузить уведомление'));
-    delay(2000);
-    yield* call(receiveNotification);
-  } finally {
-    yield put(receiveNotificationPending(false));
-  }
-}
-
 function* deleteNotification({ payload }: Action<{
-  userId: string,
   receiptId: number
-  , _: undefined
 }>) {
   try {
     yield put(deleteNotificationPending(true));
     const isMessageDeleted: TDeleteNotificationResponse = yield* call(
       apiDeleteNotification,
-      payload.userId,
       payload.receiptId,
-      payload._,
     );
     if (isMessageDeleted) yield put(deleteNotificationSuccess(isMessageDeleted.result));
   } catch (e) {
     yield put(deleteNotificationFailure('Не удалось удалить уведомление'));
   } finally {
     yield put(deleteNotificationPending(false));
+  }
+}
+
+function* receiveNotification(): Generator {
+  try {
+    yield put(receiveNotificationPending(true));
+    const notification: TNotificationType | null = yield* call(apiReceiveNotification);
+    if (notification) {
+      yield put(receiveNotificationSuccess(notification));
+      yield deleteNotification({
+        payload: { receiptId: notification.receiptId },
+        type: DELETE_NOTIFICATION,
+      });
+    } else {
+      yield* call(receiveNotification);
+    }
+  } catch (e) {
+    yield put(receiveNotificationFailure('Не удалось загрузить уведомление'));
+  } finally {
+    yield put(receiveNotificationPending(false));
   }
 }
 
